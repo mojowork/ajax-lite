@@ -10,15 +10,17 @@
         var url              = options.url       ||  '',
             method           = options.method    ||  'get',
             data             = options.data      ||  null,
+            headers          = options.headers   ||  [],
             success_callback = options.success   ||  function () {},
             fail_callback    = options.fail      ||  function () {},
             async            = options.async     ||  true;
 
         // XHR
-        url = dataToGetUrl(method, url, data);
         var xhr = new XMLHttpRequest();
+        url = dataToGetUrl(method, url, data);
         xhr.open(method, url, async);
-        xhr.send();
+        setHeaders(xhr, headers);
+        xhr.send(objectToQueryString(data));
 
         // 监听
         xhr.onreadystatechange = function() {
@@ -30,7 +32,22 @@
                 }
             }
         }
-
+    }
+    // 设置post请求头部信息
+    function setHeaders (xhr, headers) {
+        headers = headers || {};
+        if (!hasContentType(headers)) {
+            headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+        Object.keys(headers).forEach(function (name) {
+            (headers[name] && xhr.setRequestHeader(name, headers[name]));
+        })
+    }
+    // 检测 content-type 是否设置
+    function hasContentType (headers) {
+        return Object.keys(headers).some(function (name) {
+            return name.toLowerCase() === 'content-type'
+        })
     }
 
     // 处理get请求时，所携带数据进行URl拼接

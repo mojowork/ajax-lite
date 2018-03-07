@@ -12,14 +12,14 @@
     <script>
         window.onload = function (ev) {
             var obtn = document.getElementById('btn');
-            obtn.addEventListener('click', myclick)
+            obtn.addEventListener('click', myclick);
         };
         function myclick() {
             ajax({
                 url: 'http://localhost:3000',
                 data: {
                   name: 'chaoshuai',
-                  age: 12
+                  age: 17
                 },
                 success: function (res) {
                     console.log('res ==> ',res)

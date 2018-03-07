@@ -10,10 +10,16 @@
 
 ```js
 var request = ajax({
-  method: 'get',
+  method: 'post',
   url: '/api/users',
   data: {
     user: 'john'
+  },
+  success: function (res) {
+      console.log('成功 =>', res)
+  },
+  fail:function (err) {
+      console.log('失败 =>', err)
   }
 })
 ```

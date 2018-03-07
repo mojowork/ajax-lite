@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../src/ajax.js"></script>
+</head>
+<body>
+<button id="btn">点我</button>
+<script>
+    window.onload = function (ev) {
+        var obtn = document.getElementById('btn');
+        obtn.addEventListener('click', myclick)
+    };
+    function myclick() {
+        ajax({
+            url: 'http://localhost:3000',
+            method: 'post',
+            data: {
+                name: 'chaoshuai',
+                age: 17
+            },
+            success: function (res) {
+                console.log('res ==> ',res)
+            },
+            fail:function (err) {
+                console.log('err ==> ',err)
+            }
+        })
+    };
+</script>
+
+</body>
+</html>
