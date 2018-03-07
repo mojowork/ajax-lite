@@ -17,6 +17,10 @@
         function myclick() {
             ajax({
                 url: 'http://localhost:3000',
+                data: {
+                  name: 'chaoshuai',
+                  age: 12
+                },
                 success: function (res) {
                     console.log('res ==> ',res)
                 },
